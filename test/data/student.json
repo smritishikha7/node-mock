@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "62ee5c64e11bdf9d902d62c6",
+    "name": "smriti",
+    "age": 10,
+    "email": "smriti@gmail.com"
+  },
+  {
+    "_id": "62ee5ca1e11bdf9d902d62c7",
+    "name": "sourabh",
+    "age": 12,
+    "email": "sourabh@gmail.com"
+  },
+  {
+    "_id": "62ee5ca1e11bdf9d902d62c7",
+    "name": "ayesha",
+    "age": 14,
+    "email": "ayesha@gmail.com"
+  }
+]
