@@ -1,9 +1,9 @@
 const Student = require("../models/student");
+const ObjectId = require("mongoose").Types.ObjectId;
 // this class and its function will only connect to Student model
 class StudentRepository {
 
     create(data) {
-        console.log("in repo layer")
         return Student.create(data)
     }
 
@@ -19,6 +19,11 @@ class StudentRepository {
             // sort : _id
         }
         return Student.find(filters, project, queryOptions)
+    }
+
+    findById(id) {
+        if (!ObjectId.isValid(id)) throw new Error("Id passed is not a mongoId")
+        return Student.findById(id)
     }
 }
 

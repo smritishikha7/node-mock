@@ -23,4 +23,17 @@ describe("getStudents test cases ", function () {
         const students = await studentService.getStudents({ std: 6 })
         expect(students.length).to.equal(2)
     })
+
+    it("will throw an error as std value is greater than 12", async function () {
+        try {
+            StudentRepository.prototype.findAll = jest.fn().mockImplementationOnce((params) => {
+                return testData.filter(x => x.age >= params.age.from && x.age <= params.age.to)
+            });
+            await studentService.getStudents({ std: 14 })
+        }
+        catch (err) {
+            expect(err).to.instanceOf(Error);
+            expect(err.message).to.equal("Std cannot be greater than 12")
+        }
+    })
 })

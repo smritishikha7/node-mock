@@ -34,4 +34,34 @@ describe("findAll ", function () {
             console.log(err)
         }
     });
+
+    it("should throw an error when id passed is not mongoid", async function () {
+        try {
+            StudentModel.findById = jest.fn().mockImplementation((id) => {
+                return testData.filter(x => x._id == id)
+            })
+            await studentRepository.findById("62ee5ca1e11bdf9d902d62c7");
+        }
+        catch (err) {
+            console.log(err)
+            expect(err).to.instanceOf(Error);
+            expect(err.message).to.equal("Id passed is not a mongoId")
+        }
+    });
+    it("should throw mongo error when require field is not passed", async function () {
+        try {
+            StudentModel.create = jest.fn().mockImplementation((data) => {
+                throw new Error("students validation failed: age: Path `age` is required.")
+            })
+            const studentData = {
+                name: "test",
+                email: "test@mode.com"
+            }
+            await studentRepository.create(studentData);
+        }
+        catch (err) {
+            expect(err).to.instanceOf(Error);
+            expect(err.message).to.equal("students validation failed: age: Path `age` is required.")
+        }
+    });
 })
